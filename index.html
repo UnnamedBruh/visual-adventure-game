@@ -1,0 +1,62 @@
+<p>Welcome to this visual adventure game! You can control this game using the buttons that appear below the video player. This is meant to be a fun project; maybe this could turn into something more than a project! Who knows?</p>
+<video src="game1.mp4">Whoops! Looks like your browser doesn't support MP4 videos yet! This case will be handled later.</video><br>
+<div id="buttons"><button id="b1">Play Game</button></div><script>
+	let state = 0;
+	let buttons = [document.getElementById("b1"), document.getElementById("b2"), document.getElementById("b3")];
+	let video = document.querySelector("video");
+	function stateButtons(disab) {
+		buttons[0].disabled = buttons[1].disabled = buttons[2].disabled = !disab;
+	}
+	function changeButton(index, disabled, text, func) {
+		buttons[index].disabled = disabled;
+		if (disabled) return;
+		buttons[index].textContent = text;
+		buttons[index].onclick = function() 
+			func();
+		}
+	}
+	function playGame(todo) {
+		switch (todo) {
+			case 0:
+				video.currentTime = 0;
+				video.play();
+				break;
+			case 1:
+				changeButton(0, false, "Look Around", () => playGame(2));
+				changeButton(1, false, "Get Up", () => playGame(3));
+				break;
+			case 2:
+				stateButtons(false);
+				video.currentTime = 10.5;
+				state = 2;
+				break;
+			case 3:
+				stateButtons(false);
+				video.currentTime = 27;
+				document.querySelector("p").textContent = "Looks like you reached the end of this game!";
+				state = 3;
+				break;
+		}
+	}
+	setInterval(function() {
+		switch (state) {
+			case 0:
+				if (video.currentTime > 10.4) {
+					state = 1;
+					playGame(1);
+				}
+				break;
+			case 1:
+				if (video.currentTime > 19) video.currentTime = 10.5;
+				break;
+			case 2:
+				if (video.currentTime > 26.8) {
+					state = 1;
+					video.currentTime = 10.5;
+					playGame(1);
+				}
+				break;
+		}
+	}, 100);
+	changeButton(0, false, "Play Game", () => playGame(0));
+</script>
