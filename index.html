@@ -28,11 +28,13 @@
 			case 2:
 				stateButtons(false);
 				video.currentTime = 19.1;
+				video.play();
 				state = 2;
 				break;
 			case 3:
 				stateButtons(false);
 				video.currentTime = 27;
+				video.play();
 				document.querySelector("p").textContent = "Looks like you reached the end of this game!";
 				state = 3;
 				break;
@@ -47,12 +49,16 @@
 				}
 				break;
 			case 1:
-				if (video.currentTime > 19) video.currentTime = 10.5;
+				if (video.currentTime > 19) {
+					video.currentTime = 10.5;
+					video.play();
+				}
 				break;
 			case 2:
 				if (video.currentTime > 26.8) {
 					state = 1;
 					video.currentTime = 10.5;
+					video.play();
 					playGame(1);
 				}
 				break;
