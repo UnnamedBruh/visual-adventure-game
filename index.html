@@ -11,9 +11,7 @@
 		buttons[index].disabled = disabled;
 		if (disabled) return;
 		buttons[index].textContent = text;
-		buttons[index].onclick = function() 
-			func();
-		}
+		buttons[index].onclick = func.call();
 	}
 	function playGame(todo) {
 		switch (todo) {
