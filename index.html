@@ -35,8 +35,17 @@
 				stateButtons(false);
 				video.currentTime = 27.3;
 				video.play();
-				document.querySelector("p").textContent = "Looks like you reached the end of this game!";
 				state = 3;
+				break;
+			case 4:
+				changeButton(0, false, "Go Outside", () => playGame(5));
+				break;
+			case 5:
+				stateButtons(false);
+				video.currentTime = 40.1;
+				video.play();
+				state = 5;
+				document.querySelector("p").textContent = "Looks like you reached the end of this game!";
 				break;
 		}
 	}
@@ -60,6 +69,18 @@
 					video.currentTime = 10.5;
 					video.play();
 					playGame(1);
+				}
+				break;
+			case 3:
+				if (video.currentTime > 28.5) {
+					state = 4;
+					playGame(4);
+				}
+				break;
+			case 4:
+				if (video.currentTime > 39.6) {
+					video.currentTime = 28.5;
+					video.play();
 				}
 				break;
 		}
